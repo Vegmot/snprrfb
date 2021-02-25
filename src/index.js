@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app/layout/App';
 
+import 'semantic-ui-css/semantic.min.css';
 import './app/layout/App.css';
 
 // Whenever there is a change in the page,
@@ -13,7 +14,7 @@ const render = () => {
 };
 
 if (module.hot) {
-	module.hot.accept('./App', () => {
+	module.hot.accept('./app/layout/App', () => {
 		setTimeout(render);
 	});
 }
