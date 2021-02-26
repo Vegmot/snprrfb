@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import App from './app/layout/App';
 
@@ -10,13 +11,18 @@ import './app/layout/App.css';
 const rootEl = document.getElementById('root');
 
 const render = () => {
-	ReactDOM.render(<App />, rootEl);
+  ReactDOM.render(
+    <Router>
+      <App />
+    </Router>,
+    rootEl
+  );
 };
 
 if (module.hot) {
-	module.hot.accept('./app/layout/App', () => {
-		setTimeout(render);
-	});
+  module.hot.accept('./app/layout/App', () => {
+    setTimeout(render);
+  });
 }
 
 render();
