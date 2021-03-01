@@ -10,11 +10,13 @@ const EventDetailedInfo = ({ event }) => {
             <Grid.Column width={1}>
               <Icon size='large' color='teal' name='info' />
             </Grid.Column>
+
             <Grid.Column width={15}>
               <p>{event.description}</p>
             </Grid.Column>
           </Grid>
         </Segment>
+
         <Segment attached>
           <Grid verticalAlign='middle'>
             <Grid.Column width={1}>
@@ -25,14 +27,17 @@ const EventDetailedInfo = ({ event }) => {
             </Grid.Column>
           </Grid>
         </Segment>
+
         <Segment attached>
           <Grid verticalAlign='middle'>
             <Grid.Column width={1}>
               <Icon name='marker' size='large' color='teal' />
             </Grid.Column>
+
             <Grid.Column width={11}>
               <span>{event.venue}</span>
             </Grid.Column>
+
             <Grid.Column width={4}>
               <Button color='teal' size='tiny' content='Show Map' />
             </Grid.Column>

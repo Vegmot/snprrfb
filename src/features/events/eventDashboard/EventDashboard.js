@@ -6,15 +6,11 @@ import { useSelector } from 'react-redux';
 const EventDashboard = () => {
   const { events } = useSelector(state => state.event);
 
-  const deleteEventHandler = eventId => {
-    console.log(`Event number ${eventId} deleted`);
-  };
-
   return (
     <>
       <Grid>
         <Grid.Column width={10}>
-          <EventList events={events} deleteEvent={deleteEventHandler} />
+          <EventList events={events} />
         </Grid.Column>
 
         <Grid.Column width={6}>
