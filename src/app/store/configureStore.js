@@ -1,9 +1,9 @@
 import { createStore } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension';
-import testReducer from '../../features/sandbox/testReducer';
+import rootReducer from './rootReducer';
 
 const configureStore = () => {
-  return createStore(testReducer, devToolsEnhancer());
+  return createStore(rootReducer, devToolsEnhancer());
 };
 
 export default configureStore;

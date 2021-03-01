@@ -3,7 +3,7 @@ export const sampleData = [
     id: 1,
     title: 'Job',
     date: '2019-08-09',
-    category: 'Maroon',
+    category: 'culture',
     description: 'Sed ante. Vivamus tortor. Duis mattis egestas metus.',
     city: 'Xiachen',
     venue: '9374 Rockefeller Lane',
@@ -40,7 +40,7 @@ export const sampleData = [
     id: 2,
     title: 'Fixflex',
     date: '2018-07-01',
-    category: 'Red',
+    category: 'film',
     description:
       'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.',
     city: 'Kanganpur',
@@ -90,7 +90,7 @@ export const sampleData = [
     id: 3,
     title: 'Bytecard',
     date: '2018-11-08',
-    category: 'Green',
+    category: 'film',
     description:
       'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.',
     city: 'Hässleholm',
@@ -128,7 +128,7 @@ export const sampleData = [
     id: 4,
     title: 'Gembucket',
     date: '2019-08-30',
-    category: 'Aquamarine',
+    category: 'music',
     description:
       'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.',
     city: 'Baláo',
@@ -166,7 +166,7 @@ export const sampleData = [
     id: 5,
     title: 'Asoka',
     date: '2020-02-20',
-    category: 'Puce',
+    category: 'culture',
     description:
       'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.',
     city: 'Arboga',
@@ -198,7 +198,7 @@ export const sampleData = [
     id: 6,
     title: 'Viva',
     date: '2019-04-02',
-    category: 'Mauv',
+    category: 'drinks',
     description:
       'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.',
     city: 'Verkhov’ye',
@@ -235,7 +235,7 @@ export const sampleData = [
     id: 7,
     title: 'Fintone',
     date: '2019-02-21',
-    category: 'Khaki',
+    category: 'travel',
     description:
       'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.',
     city: 'El Arenal',
@@ -285,7 +285,7 @@ export const sampleData = [
     id: 8,
     title: 'Stim',
     date: '2019-07-03',
-    category: 'Aquamarine',
+    category: 'music',
     description:
       'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.',
     city: 'Kamen’-na-Obi',
@@ -335,7 +335,7 @@ export const sampleData = [
     id: 9,
     title: 'Redhold',
     date: '2018-06-24',
-    category: 'Mauv',
+    category: 'film',
     description:
       'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.',
     city: 'Profítis Ilías',
@@ -385,7 +385,7 @@ export const sampleData = [
     id: 10,
     title: 'Temp',
     date: '2019-01-05',
-    category: 'Red',
+    category: 'food',
     description:
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.\n\nVestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.',
     city: 'Campina Grande',
@@ -411,7 +411,7 @@ export const sampleData = [
     id: 11,
     title: 'Zamit',
     date: '2019-09-03',
-    category: 'Red',
+    category: 'drinks',
     description:
       'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.',
     city: 'Paola',
@@ -467,7 +467,7 @@ export const sampleData = [
     id: 12,
     title: 'Voyatouch',
     date: '2020-07-28',
-    category: 'Mauv',
+    category: 'travel',
     description:
       'Sed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.',
     city: 'Algoz',
@@ -511,7 +511,7 @@ export const sampleData = [
     id: 13,
     title: 'Bitchip',
     date: '2020-09-29',
-    category: 'Crimson',
+    category: 'drinks',
     description:
       'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\n\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.\n\nCras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.',
     city: 'Kobrinskoye',
@@ -543,7 +543,7 @@ export const sampleData = [
     id: 14,
     title: 'Zaam-Dox',
     date: '2019-08-23',
-    category: 'Maroon',
+    category: 'food',
     description:
       'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.',
     city: 'Cache Creek',
@@ -575,7 +575,7 @@ export const sampleData = [
     id: 15,
     title: 'Pannier',
     date: '2019-09-17',
-    category: 'Khaki',
+    category: 'culture',
     description:
       'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.',
     city: 'Edinburgh',
@@ -601,7 +601,7 @@ export const sampleData = [
     id: 16,
     title: 'Bigtax',
     date: '2020-07-02',
-    category: 'Green',
+    category: 'travel',
     description:
       'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.',
     city: 'Maydolong',
@@ -639,7 +639,7 @@ export const sampleData = [
     id: 17,
     title: 'Y-Solowarm',
     date: '2019-06-08',
-    category: 'Aquamarine',
+    category: 'travel',
     description:
       'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.',
     city: 'Severskaya',
@@ -695,7 +695,7 @@ export const sampleData = [
     id: 18,
     title: 'Tin',
     date: '2019-02-22',
-    category: 'Aquamarine',
+    category: 'food',
     description:
       'Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.',
     city: 'Karangnongko',
@@ -727,7 +727,7 @@ export const sampleData = [
     id: 19,
     title: 'Daltfresh',
     date: '2020-02-27',
-    category: 'Goldenrod',
+    category: 'music',
     description:
       'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.',
     city: 'Keyinhe',
@@ -759,7 +759,7 @@ export const sampleData = [
     id: 20,
     title: 'It',
     date: '2019-05-29',
-    category: 'Teal',
+    category: 'drinks',
     description:
       'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.',
     city: 'Agalteca',

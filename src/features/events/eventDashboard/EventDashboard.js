@@ -1,24 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import EventList from './EventList';
-
-import { sampleData } from '../../../app/api/sampleData';
+import { useSelector } from 'react-redux';
 
 const EventDashboard = () => {
-  const [events, setEvents] = useState(sampleData);
-
-  /*   const createEventHandler = event => {
-    setEvents([...events, event]);
-  };
-
-  const updateEventHandler = updatedEvent => {
-    setEvents(
-      events.map(event => (event.id === updatedEvent.id ? updatedEvent : event))
-    );
-  }; */
+  const { events } = useSelector(state => state.event);
 
   const deleteEventHandler = eventId => {
-    setEvents(events.filter(event => event.id !== eventId));
+    console.log(`Event number ${eventId} deleted`);
   };
 
   return (

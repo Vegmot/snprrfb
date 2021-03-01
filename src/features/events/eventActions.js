@@ -1,5 +1,4 @@
 import { CREATE_EVENT, DELETE_EVENT, UPDATE_EVENT } from './eventContstants';
-import axios from 'axios';
 
 export const createEvent = event => {
   return {
