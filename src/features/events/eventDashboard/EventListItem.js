@@ -34,7 +34,7 @@ const EventListItem = ({ event }) => {
         <Segment secondary>
           <List horizontal>
             {event.attendees.map(attendee => (
-              <EventListAttendee attendee={attendee} />
+              <EventListAttendee attendee={attendee} key={attendee.id} />
             ))}
           </List>
         </Segment>
