@@ -4,10 +4,12 @@ import TestModal from '../../../features/sandbox/TestModal';
 import LoginForm from '../../../features/auth/LoginForm';
 
 const ModalManager = () => {
-  const modalLookup = { TestModal, LoginForm };
+  const modalLookup = {
+    TestModal,
+    LoginForm,
+  };
   const currentModal = useSelector(state => state.modals);
   let renderedModal;
-
   if (currentModal) {
     const { modalType, modalProps } = currentModal;
     const ModalComponent = modalLookup[modalType];
