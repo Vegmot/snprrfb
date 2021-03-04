@@ -1,8 +1,12 @@
-import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT } from './eventContstants';
-import { sampleData } from '../../app/api/sampleData';
+import {
+  CREATE_EVENT,
+  UPDATE_EVENT,
+  DELETE_EVENT,
+  FETCH_EVENTS,
+} from './eventContstants';
 
 const initialState = {
-  events: sampleData,
+  events: [],
 };
 
 export const eventReducer = (state = initialState, action) => {
@@ -29,6 +33,12 @@ export const eventReducer = (state = initialState, action) => {
         events: [
           ...state.events.filter(event => event.id !== action.payload), // in the action file, deleteEvent function is already returning eventId, so action.payload is eventId here
         ],
+      };
+
+    case FETCH_EVENTS:
+      return {
+        ...state,
+        events: action.payload,
       };
 
     default:
