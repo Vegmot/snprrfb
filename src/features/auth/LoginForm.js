@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalWrapper from '../../app/common/modals/ModalManager';
+import ModalWrapper from '../../app/common/modals/ModalWrapper';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import MyTextInput from '../../app/common/form/MyTextInput';
