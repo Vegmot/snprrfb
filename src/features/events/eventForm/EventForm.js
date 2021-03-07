@@ -13,6 +13,7 @@ import MyTextArea from '../../../app/common/form/MyTextArea';
 import { categoryOptions } from '../../../app/api/categoryOptions';
 import {
   addEventsToFirestore,
+  cancelEventToggle,
   listenToEventsFromFirestore,
   updateEventInFirestore,
 } from '../../../app/firestore/firestoreService';
@@ -113,6 +114,21 @@ const EventForm = ({ match, history }) => {
                 positive
                 content='Submit'
               />
+
+              {selectedEvent && (
+                <Button
+                  type='button'
+                  floated='left'
+                  color={selectedEvent.isCancelled ? 'green' : 'red'}
+                  content={
+                    selectedEvent.isCancelled
+                      ? 'Reactivate event'
+                      : 'Cancel event'
+                  }
+                  onClick={() => cancelEventToggle(selectedEvent)}
+                />
+              )}
+
               <Button
                 as={Link}
                 to='/events'
