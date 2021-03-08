@@ -1,5 +1,5 @@
-import cuid from 'cuid';
 import firebase from '../config/firebase';
+import cuid from 'cuid';
 
 const db = firebase.firestore();
 
@@ -55,4 +55,15 @@ export const cancelEventToggle = event => {
   return db.collection('events').doc(event.id).update({
     isCancelled: !event.isCancelled,
   });
+};
+
+export const setUserProfileData = user => {
+  return db
+    .collection('users')
+    .doc(user.uid)
+    .set({
+      displayName: user.displayName,
+      email: user.email,
+      createdAt: firebase.firestore().FieldValue.serverTimestamp(),
+    });
 };

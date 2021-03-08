@@ -3,50 +3,43 @@ import ModalWrapper from '../../app/common/modals/ModalWrapper';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import MyTextInput from '../../app/common/form/MyTextInput';
-import { Button, Label } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../app/common/modals/modalReducer';
-import { signInWithEmail } from '../../app/firestore/firebaseService';
+import { registerInFirebase } from '../../app/firestore/firebaseService';
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const dispatch = useDispatch();
 
   return (
-    <ModalWrapper size='mini' header='Sign in'>
+    <ModalWrapper size='mini' header='Register'>
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ displayName: '', email: '', password: '' }}
         validationSchema={Yup.object({
+          displayName: Yup.string().required(),
           email: Yup.string().required().email(),
           password: Yup.string().required(),
         })}
-        onSubmit={async (values, { setSubmitting, setErrors }) => {
+        onSubmit={async (values, { setSubmitting }) => {
           try {
-            await signInWithEmail(values);
+            await registerInFirebase(values);
             setSubmitting(false);
             dispatch(closeModal());
           } catch (error) {
-            setErrors({ auth: error.message });
             setSubmitting(false);
+            console.log(error);
           }
         }}
       >
-        {({ isSubmitting, isValid, dirty, errors }) => (
+        {({ isSubmitting, isValid, dirty }) => (
           <Form className='ui form'>
+            <MyTextInput name='displayName' placeholder='Email display name' />
             <MyTextInput name='email' placeholder='Email address' />
             <MyTextInput
               name='password'
               placeholder='Password'
               type='password'
             />
-
-            {errors.auth && (
-              <Label
-                basic
-                color='red'
-                style={{ marginBottom: '10' }}
-                content={errors.auth}
-              />
-            )}
 
             <Button
               loading={isSubmitting}
@@ -55,7 +48,7 @@ const LoginForm = () => {
               fluid
               size='large'
               color='teal'
-              content='Login'
+              content='Register'
             />
           </Form>
         )}
@@ -64,4 +57,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
