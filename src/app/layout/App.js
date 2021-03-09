@@ -10,6 +10,7 @@ import Sandbox from '../../features/sandbox/Sandbox';
 import ModalManager from '../common/modals/ModalManager';
 import { ToastContainer } from 'react-toastify';
 import ErrorComponent from '../common/errors/ErrorComponent';
+import AccountPage from '../../features/auth/AccountPage';
 
 const App = () => {
   const { key } = useLocation();
@@ -33,6 +34,7 @@ const App = () => {
                 component={EventForm}
                 key={key}
               />
+              <Route path='/account' component={AccountPage} />
               <Route path='/error' component={ErrorComponent} />
             </Container>
           </>

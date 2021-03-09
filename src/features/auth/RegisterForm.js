@@ -3,10 +3,11 @@ import ModalWrapper from '../../app/common/modals/ModalWrapper';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import MyTextInput from '../../app/common/form/MyTextInput';
-import { Button } from 'semantic-ui-react';
+import { Button, Divider } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../app/common/modals/modalReducer';
 import { registerInFirebase } from '../../app/firestore/firebaseService';
+import SocialLogin from './SocialLogin';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -50,6 +51,10 @@ const RegisterForm = () => {
               color='teal'
               content='Register'
             />
+
+            <Divider horizontal>Or</Divider>
+
+            <SocialLogin />
           </Form>
         )}
       </Formik>
