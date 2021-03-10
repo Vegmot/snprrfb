@@ -37,9 +37,15 @@ export const socialLogin = async selectedProvider => {
     const result = await firebase.auth().signInWithPopup(provider);
 
     if (result.additionalUserInfo.isNewUser) {
+      console.log(result);
       await setUserProfileData(result.user);
     }
   } catch (error) {
     toast.error(error.message);
   }
+};
+
+export const updateUserPassword = creds => {
+  const user = firebase.auth().currentUser; // syncronous
+  return user.updatePassword(creds.newPassword);
 };

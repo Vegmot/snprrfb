@@ -11,8 +11,8 @@ const SignedInMenu = () => {
 
   const signOutHandler = async () => {
     try {
-      await signOutFirebase();
       history.push('/');
+      await signOutFirebase();
     } catch (error) {
       toast.error(error.message);
     }
@@ -26,7 +26,7 @@ const SignedInMenu = () => {
           spaced='right'
           src={currentUser.photoURL || '/assets/user.png'}
         />
-        <Dropdown pointing='top left' text={currentUser.email}>
+        <Dropdown pointing='top left' text={currentUser.displayName}>
           <Dropdown.Menu>
             <Dropdown.Item
               as={Link}
@@ -34,13 +34,16 @@ const SignedInMenu = () => {
               text='Create Event'
               icon='plus'
             />
+
             <Dropdown.Item text='My profile' icon='user' />
+
             <Dropdown.Item
               as={Link}
               to='/account'
               text='My account'
               icon='settings'
             />
+
             <Dropdown.Item
               onClick={signOutHandler}
               text='Sign out'
