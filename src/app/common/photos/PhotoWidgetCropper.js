@@ -8,7 +8,6 @@ const PhotoWidgetCropper = ({ setImage, imagePreview }) => {
     if (typeof cropper.current.getCroppedCanvas() === 'undefined') {
       return
     }
-
     cropper.current.getCroppedCanvas().toBlob(blob => {
       setImage(blob)
     }, 'image/jpeg')
@@ -20,6 +19,7 @@ const PhotoWidgetCropper = ({ setImage, imagePreview }) => {
         ref={cropper}
         src={imagePreview}
         style={{ height: 200, width: '100%' }}
+        // Cropper.js options
         aspectRatio={1}
         preview='.img-preview'
         guides={false}

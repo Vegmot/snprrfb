@@ -65,7 +65,7 @@ export const setUserProfileData = user => {
       displayName: user.displayName,
       email: user.email,
       photoURL: user.photoURL || null,
-      createdAt: firebase.firestore().FieldValue.serverTimestamp(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     })
 }
 
