@@ -1,10 +1,10 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Button, Menu } from 'semantic-ui-react';
-import { openModal } from '../../app/common/modals/modalReducer';
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { Button, Menu } from 'semantic-ui-react'
+import { openModal } from '../../app/common/modals/modalReducer'
 
 const SignedOutMenu = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -24,7 +24,7 @@ const SignedOutMenu = () => {
         />
       </Menu.Item>
     </>
-  );
-};
+  )
+}
 
-export default SignedOutMenu;
+export default SignedOutMenu

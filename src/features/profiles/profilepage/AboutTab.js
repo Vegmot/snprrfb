@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Button, Grid, Header, Tab } from 'semantic-ui-react';
-import { format, parseISO } from 'date-fns';
+import React, { useState } from 'react'
+import { Button, Grid, Header, Tab } from 'semantic-ui-react'
+import { format, parseISO } from 'date-fns'
+import ProfileForm from './ProfileForm'
 
-const AboutTab = profile => {
-  const [editMode, setEditMode] = useState(false);
+const AboutTab = ({ profile, isCurrentUser }) => {
+  const [editMode, setEditMode] = useState(false)
 
   return (
     <>
@@ -15,17 +16,20 @@ const AboutTab = profile => {
               icon='user'
               content={`About ${profile.displayName}`}
             />
-            <Button
-              onClick={() => setEditMode(true)}
-              float='right'
-              basic
-              content={editMode ? 'Cancel' : 'Edit'}
-            />
+
+            {isCurrentUser && (
+              <Button
+                onClick={() => setEditMode(!editMode)}
+                float='right'
+                basic
+                content={editMode ? 'Cancel' : 'Edit'}
+              />
+            )}
           </Grid.Column>
 
           <Grid.Column width={16}>
             {editMode ? (
-              <p>Profile form</p>
+              <ProfileForm profile={profile} />
             ) : (
               <>
                 <div style={{ marginBottom: 10 }}>
@@ -41,7 +45,7 @@ const AboutTab = profile => {
         </Grid>
       </Tab.Pane>
     </>
-  );
-};
+  )
+}
 
-export default AboutTab;
+export default AboutTab

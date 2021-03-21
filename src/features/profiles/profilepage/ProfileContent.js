@@ -1,15 +1,20 @@
-import React from 'react';
-import { Tab } from 'semantic-ui-react';
-import AboutTab from './AboutTab';
+import React from 'react'
+import { Tab } from 'semantic-ui-react'
+import AboutTab from './AboutTab'
 
-const ProfileContent = ({ profile }) => {
+const ProfileContent = ({ profile, isCurrentUser }) => {
   const panes = [
-    { menuItem: 'About', render: () => <AboutTab profile={profile} /> },
+    {
+      menuItem: 'About',
+      render: () => (
+        <AboutTab profile={profile} isCurrentUser={isCurrentUser} />
+      ),
+    },
     { menuItem: 'Photos', render: () => <Tab.Pane>Photos</Tab.Pane> },
     { menuItem: 'Events', render: () => <Tab.Pane>Events</Tab.Pane> },
     { menuItem: 'Followers', render: () => <Tab.Pane>Followers</Tab.Pane> },
     { menuItem: 'Following', render: () => <Tab.Pane>Following</Tab.Pane> },
-  ];
+  ]
 
   return (
     <>
@@ -19,7 +24,7 @@ const ProfileContent = ({ profile }) => {
         panes={panes}
       />
     </>
-  );
-};
+  )
+}
 
-export default ProfileContent;
+export default ProfileContent
