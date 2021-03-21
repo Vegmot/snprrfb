@@ -14,7 +14,7 @@ const AboutTab = ({ profile, isCurrentUser }) => {
             <Header
               floated='left'
               icon='user'
-              content={`About ${profile.displayName}`}
+              content={`About ${profile?.displayName}`}
             />
 
             {isCurrentUser && (
@@ -35,9 +35,9 @@ const AboutTab = ({ profile, isCurrentUser }) => {
                 <div style={{ marginBottom: 10 }}>
                   <strong>
                     Member since:{' '}
-                    {format(parseISO(profile.createdAt), 'dd MMM yyyy')}
+                    {format(parseISO(profile?.createdAt), 'dd MMM yyyy')}
                   </strong>
-                  <div>{profile.description || null}</div>
+                  <div>{profile?.description || null}</div>
                 </div>
               </>
             )}
