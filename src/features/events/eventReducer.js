@@ -3,11 +3,13 @@ import {
   UPDATE_EVENT,
   DELETE_EVENT,
   FETCH_EVENTS,
-} from './eventContstants';
+  LISTEN_TO_EVENT_CHAT,
+} from './eventContstants'
 
 const initialState = {
   events: [],
-};
+  comments: [],
+}
 
 export const eventReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,7 +17,7 @@ export const eventReducer = (state = initialState, action) => {
       return {
         ...state,
         events: [...state.events, action.payload],
-      };
+      }
 
     case UPDATE_EVENT:
       return {
@@ -25,7 +27,7 @@ export const eventReducer = (state = initialState, action) => {
           action.payload,
         ], // here, [...filter] part means that the array has to contain all the events except one thas is being modified/updated
         // and then pushing the updated one into this array
-      };
+      }
 
     case DELETE_EVENT:
       return {
@@ -33,15 +35,21 @@ export const eventReducer = (state = initialState, action) => {
         events: [
           ...state.events.filter(event => event.id !== action.payload), // in the action file, deleteEvent function is already returning eventId, so action.payload is eventId here
         ],
-      };
+      }
 
     case FETCH_EVENTS:
       return {
         ...state,
         events: action.payload,
-      };
+      }
+
+    case LISTEN_TO_EVENT_CHAT:
+      return {
+        ...state,
+        comments: action.payload,
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}

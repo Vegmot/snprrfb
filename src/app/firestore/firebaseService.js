@@ -2,6 +2,20 @@ import { toast } from 'react-toastify'
 import firebase from '../config/firebase'
 import { setUserProfileData } from './firestoreService'
 
+// turns an object containing objects that are returned from firebase
+// into an array
+// Object.entries turns each item (id, snapshot) into array
+// and Object assign turns each new array into object field
+// so that it will be easier for us to work with the data
+// as it is structured just like a regular array of object
+export const firebaseObjectToArray = snapshot => {
+  if (snapshot) {
+    return Object.entries(snapshot).map(each =>
+      Object.assign({}, each[1], { id: each[0] })
+    )
+  }
+}
+
 export const signInWithEmail = creds => {
   return firebase.auth().signInWithEmailAndPassword(creds.email, creds.password)
 }
@@ -60,4 +74,21 @@ export const deleteFromFirebaseStorage = filename => {
   const photoRef = storageRef.child(`${userUid}/user_images/${filename}`)
 
   return photoRef.delete()
+}
+
+export const addEventChatComment = (eventId, comment) => {
+  const user = firebase.auth().currentUser
+  const newComment = {
+    displayName: user.displayName,
+    photoURL: user.photoURL,
+    uid: user.uid,
+    text: comment,
+    date: Date.now(),
+  }
+
+  return firebase.database().ref(`chat/${eventId}`).push(newComment)
+}
+
+export const getEventChatRef = eventId => {
+  return firebase.database().ref(`chat/${eventId}`).orderByKey()
 }
