@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Icon, Item, Label, List, Segment } from 'semantic-ui-react';
-import EventListAttendee from './EventListAttendee';
-import { format } from 'date-fns';
-import { deleteEventInFirestore } from '../../../app/firestore/firestoreService';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Button, Icon, Item, Label, List, Segment } from 'semantic-ui-react'
+import EventListAttendee from './EventListAttendee'
+import { format } from 'date-fns'
+import { deleteEventInFirestore } from '../../../app/firestore/firestoreService'
 
 const EventListItem = ({ event }) => {
   return (
@@ -15,7 +15,10 @@ const EventListItem = ({ event }) => {
               <Item.Image size='tiny' circular src={event.hostPhotoURL} />
               <Item.Content>
                 <Item.Header content={event.title + ' - ' + event.category} />
-                <Item.Description>Hosted by {event.hostedBy}</Item.Description>
+                <Item.Description>
+                  Hosted by{' '}
+                  <Link to={`/profile/${event.hostUid}`}>{event.hostedBy}</Link>
+                </Item.Description>
                 {event.isCancelled && (
                   <Label
                     style={{ top: '-40px' }}
@@ -62,7 +65,7 @@ const EventListItem = ({ event }) => {
         </Segment>
       </Segment.Group>
     </>
-  );
-};
+  )
+}
 
-export default EventListItem;
+export default EventListItem

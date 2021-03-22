@@ -1,5 +1,4 @@
 import firebase from '../config/firebase'
-import cuid from 'cuid'
 
 const db = firebase.firestore()
 
@@ -22,8 +21,24 @@ export const dataFromSnapshot = snapshot => {
   }
 }
 
-export const listenToEventsFromFireStore = () => {
-  return db.collection('events').orderBy('date')
+export const listenToEventsFromFireStore = predicate => {
+  const user = firebase.auth().currentUser
+  let eventsRef = db.collection('events').orderBy('date')
+
+  switch (predicate.get('filter')) {
+    case 'isGoing':
+      return eventsRef
+        .where('attendeeIds', 'array-contains', user.uid)
+        .where('date', '>=', predicate.get('startDate'))
+
+    case 'isHosting':
+      return eventsRef
+        .where('hostUid', '==', user.uid)
+        .where('date', '>=', predicate.get('startDate'))
+
+    default:
+      return eventsRef.where('date', '>=', predicate.get('startDate'))
+  }
 }
 
 export const listenToEventsFromFirestore = eventId => {
@@ -31,15 +46,18 @@ export const listenToEventsFromFirestore = eventId => {
 }
 
 export const addEventsToFirestore = event => {
+  const user = firebase.auth().currentUser
   return db.collection('events').add({
     ...event,
-    hostedBy: 'Sister Nil',
-    hostPhotoURL: 'https://randomuser.me/api/portraits/women/46.jpg',
+    hostUid: user.uid,
+    hostedBy: user.displayName,
+    hostPhotoURL: user.photoURL || null,
     attendees: firebase.firestore.FieldValue.arrayUnion({
-      id: cuid(),
-      name: 'Sister Nil',
-      photoURL: 'https://randomuser.me/api/portraits/women/46.jpg',
+      id: user.uid,
+      name: user.displayName,
+      photoURL: user.photoURL || null,
     }),
+    attendeeIds: firebase.firestore.FieldValue.arrayUnion(user.uid),
   })
 }
 
@@ -137,4 +155,66 @@ export const deletePhotoFromCollection = photoId => {
     .collection('photos')
     .doc(photoId)
     .delete()
+}
+
+export const addUserAttendance = event => {
+  const user = firebase.auth().currentUser
+  return db
+    .collection('events')
+    .doc(event.id)
+    .update({
+      attendees: firebase.firestore.FieldValue.arrayUnion({
+        id: user.uid,
+        name: user.displayName,
+        photoURL: user.photoURL || null,
+      }),
+      attendeeIds: firebase.firestore.FieldValue.arrayUnion(user.uid),
+    })
+}
+
+export const cancelUserAttendance = async event => {
+  const user = firebase.auth().currentUser
+  try {
+    const eventDoc = await db.collection('events').doc(event.id).get()
+
+    /*
+      Regarding attendees node here
+      firebase doesn't allow us to remove an object by its id,
+      so to achieve removal of an item from an array,
+      we have to specify one item and filter it
+    */
+    return db
+      .collection('events')
+      .doc(event.id)
+      .update({
+        attendeeIds: firebase.firestore.FieldValue.arrayRemove(user.uid),
+        attendees: eventDoc
+          .data()
+          .attendees.filter(attendee => attendee.id !== user.uid),
+      })
+  } catch (error) {
+    throw error
+  }
+}
+
+export const getUserEventsQuery = (activeTab, userUid) => {
+  let eventsRef = db.collection('events')
+  const today = new Date()
+
+  switch (activeTab) {
+    case 1: // Past events
+      return eventsRef
+        .where('attendeeIds', 'array-contains', userUid)
+        .where('date', '<=', today)
+        .orderBy('date', 'desc')
+
+    case 2: // Hosting
+      return eventsRef.where('hostUid', '==', 'userUid').orderBy('date')
+
+    default:
+      return eventsRef
+        .where('attendeeIds', 'array-contains', userUid)
+        .where('date', '>=', today)
+        .orderBy('date')
+  }
 }
