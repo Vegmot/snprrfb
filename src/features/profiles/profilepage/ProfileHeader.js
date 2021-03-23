@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 import {
   Button,
   Divider,
@@ -9,8 +10,36 @@ import {
   Segment,
   Statistic,
 } from 'semantic-ui-react'
+import {
+  followUser,
+  unfollowUser,
+} from '../../../app/firestore/firestoreService'
 
 const ProfileHeader = ({ profile, isCurrentUser }) => {
+  const [loading, setLoading] = useState(false)
+
+  const followUserHandler = async () => {
+    setLoading(true)
+    try {
+      await followUser(profile)
+    } catch (error) {
+      toast.error(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const unfollowUserHandler = async () => {
+    setLoading(true)
+    try {
+      await unfollowUser(profile)
+    } catch (error) {
+      toast.error(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <>
       <Segment>
@@ -49,7 +78,20 @@ const ProfileHeader = ({ profile, isCurrentUser }) => {
                   </Reveal.Content>
 
                   <Reveal.Content hidden style={{ width: '100%' }}>
-                    <Button basic color='red' content='Unfollow' />
+                    <Button
+                      onClick={followUserHandler}
+                      loading={loading}
+                      basic
+                      color='green'
+                      content='Follow'
+                    />
+                    <Button
+                      onClick={unfollowUserHandler}
+                      loading={loading}
+                      basic
+                      color='red'
+                      content='Unfollow'
+                    />
                   </Reveal.Content>
                 </Reveal>
               </>

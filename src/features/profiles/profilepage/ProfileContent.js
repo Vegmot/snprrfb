@@ -2,6 +2,7 @@ import React from 'react'
 import { Tab } from 'semantic-ui-react'
 import AboutTab from './AboutTab'
 import EventsTab from './EventsTab'
+import FollowingTab from './FollowingTab'
 import PhotosTab from './PhotosTab'
 
 const ProfileContent = ({ profile, isCurrentUser }) => {
@@ -19,8 +20,8 @@ const ProfileContent = ({ profile, isCurrentUser }) => {
       ),
     },
     { menuItem: 'Events', render: () => <EventsTab profile={profile} /> },
-    { menuItem: 'Followers', render: () => <Tab.Pane>Followers</Tab.Pane> },
-    { menuItem: 'Following', render: () => <Tab.Pane>Following</Tab.Pane> },
+    { menuItem: 'Followers', render: () => <FollowingTab profile={profile} /> },
+    { menuItem: 'Following', render: () => <FollowingTab profile={profile} /> },
   ]
 
   return (
