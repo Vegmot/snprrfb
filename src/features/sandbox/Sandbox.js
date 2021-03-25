@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 import { openModal } from '../../app/common/modals/modalReducer'
-import TestPlaceInput from './TestPlaceInput'
 import { increment, decrement } from './testReducer'
+// import TestPlaceInput from './TestPlaceInput'
 
 const Sandbox = () => {
   const data = useSelector(state => state.test.data)
