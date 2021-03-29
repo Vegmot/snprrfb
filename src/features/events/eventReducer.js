@@ -5,11 +5,15 @@ import {
   FETCH_EVENTS,
   LISTEN_TO_EVENT_CHAT,
   CLEAR_COMMENTS,
+  LISTEN_TO_SELECTED_EVENT,
+  CLEAR_EVENTS,
 } from './eventContstants'
 
 const initialState = {
   events: [],
   comments: [],
+  moreEvents: true,
+  selectedEvent: null,
 }
 
 export const eventReducer = (state = initialState, action) => {
@@ -41,7 +45,8 @@ export const eventReducer = (state = initialState, action) => {
     case FETCH_EVENTS:
       return {
         ...state,
-        events: action.payload,
+        events: [...state.events, ...action.payload.events],
+        moreEvents: action.payload.moreEvents,
       }
 
     case LISTEN_TO_EVENT_CHAT:
@@ -54,6 +59,19 @@ export const eventReducer = (state = initialState, action) => {
       return {
         ...state,
         comments: [],
+      }
+
+    case LISTEN_TO_SELECTED_EVENT:
+      return {
+        ...state,
+        selectedEvent: action.payload,
+      }
+
+    case CLEAR_EVENTS:
+      return {
+        ...state,
+        events: [],
+        moreEvents: true,
       }
 
     default:

@@ -1,36 +1,33 @@
-import React, { useState } from 'react';
-import { Header, Segment, Button, Confirm } from 'semantic-ui-react';
-import { Link, Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { listenToEvents } from '../eventActions';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import MyTextInput from '../../../app/common/form/MyTextInput';
-import MySelectInput from '../../../app/common/form/MySelectInput';
-import MyDateInput from '../../../app/common/form/MyDateInput';
-import MyTextArea from '../../../app/common/form/MyTextArea';
+import React, { useState } from 'react'
+import { Header, Segment, Button, Confirm } from 'semantic-ui-react'
+import { Link, Redirect } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { listenToSelectedEvent } from '../eventActions'
+import { Formik, Form } from 'formik'
+import * as Yup from 'yup'
+import MyTextInput from '../../../app/common/form/MyTextInput'
+import MySelectInput from '../../../app/common/form/MySelectInput'
+import MyDateInput from '../../../app/common/form/MyDateInput'
+import MyTextArea from '../../../app/common/form/MyTextArea'
 
-import { categoryOptions } from '../../../app/api/categoryOptions';
+import { categoryOptions } from '../../../app/api/categoryOptions'
 import {
   addEventsToFirestore,
   cancelEventToggle,
   listenToEventsFromFirestore,
   updateEventInFirestore,
-} from '../../../app/firestore/firestoreService';
-import { useFirestoreDoc } from '../../../app/hooks/useFirestoreDoc';
-import LoadingComponent from '../../../app/layout/LoadingComponent';
-import { toast } from 'react-toastify';
+} from '../../../app/firestore/firestoreService'
+import { useFirestoreDoc } from '../../../app/hooks/useFirestoreDoc'
+import LoadingComponent from '../../../app/layout/LoadingComponent'
+import { toast } from 'react-toastify'
 
 const EventForm = ({ match, history }) => {
-  const dispatch = useDispatch();
-  const [loadingCancel, setLoadingCancel] = useState(false);
-  const [confirmOpen, setConfirmOpen] = useState(false);
+  const dispatch = useDispatch()
+  const [loadingCancel, setLoadingCancel] = useState(false)
+  const [confirmOpen, setConfirmOpen] = useState(false)
 
-  const { loading, error } = useSelector(state => state.async);
-
-  const selectedEvent = useSelector(state =>
-    state.event.events?.find(e => e.id.toString() === match.params.id)
-  );
+  const { loading, error } = useSelector(state => state.async)
+  const { selectedEvent } = useSelector(state => state.event)
 
   const initialValues = selectedEvent ?? {
     title: '',
@@ -39,7 +36,7 @@ const EventForm = ({ match, history }) => {
     city: '',
     venue: '',
     date: '',
-  };
+  }
 
   const validationSchema = Yup.object({
     title: Yup.string().required('Please provide the title of the event'),
@@ -50,30 +47,30 @@ const EventForm = ({ match, history }) => {
       'At which place in the city will this event be held?'
     ),
     date: Yup.string().required('When will the event be held?'),
-  });
+  })
 
   const cancelToggleHandler = async event => {
-    setConfirmOpen(false);
-    setLoadingCancel(true);
+    setConfirmOpen(false)
+    setLoadingCancel(true)
     try {
-      await cancelEventToggle(event);
-      setLoadingCancel(false);
+      await cancelEventToggle(event)
+      setLoadingCancel(false)
     } catch (error) {
-      setLoadingCancel(true);
-      toast.error(error.message);
+      setLoadingCancel(true)
+      toast.error(error.message)
     }
-  };
+  }
 
   useFirestoreDoc({
     shouldExecute: !!match.params.id,
     query: () => listenToEventsFromFirestore(match.params.id),
-    data: event => dispatch(listenToEvents([event])),
+    data: event => dispatch(listenToSelectedEvent(event)),
     dependencies: [match, dispatch],
-  });
+  })
 
-  if (loading) return <LoadingComponent content='Loading event...' />;
+  if (loading) return <LoadingComponent content="Loading event..." />
 
-  if (error) return <Redirect to='/error' />;
+  if (error) return <Redirect to="/error" />
 
   return (
     <>
@@ -85,56 +82,56 @@ const EventForm = ({ match, history }) => {
             try {
               selectedEvent
                 ? await updateEventInFirestore(values)
-                : await addEventsToFirestore(values);
-              setSubmitting(false);
-              history.push('/events');
+                : await addEventsToFirestore(values)
+              setSubmitting(false)
+              history.push('/events')
             } catch (error) {
-              toast.error(error.message);
-              setSubmitting(false);
+              toast.error(error.message)
+              setSubmitting(false)
             }
           }}
         >
           {({ isSubmitting, dirty, isValid, values }) => (
-            <Form className='ui form'>
-              <Header content='Event details' sub color='teal' />
-              <MyTextInput name='title' placeholder='Event title' />
+            <Form className="ui form">
+              <Header content="Event details" sub color="teal" />
+              <MyTextInput name="title" placeholder="Event title" />
               <MySelectInput
-                name='category'
-                placeholder='Event category'
+                name="category"
+                placeholder="Event category"
                 options={categoryOptions}
               />
               <MyTextArea
-                name='description'
-                placeholder='Event description'
+                name="description"
+                placeholder="Event description"
                 rows={3}
               />
 
-              <Header content='Event location details' sub color='teal' />
-              <MyTextInput name='city' placeholder='Event city' />
-              <MyTextInput name='venue' placeholder='Event venue' />
+              <Header content="Event location details" sub color="teal" />
+              <MyTextInput name="city" placeholder="Event city" />
+              <MyTextInput name="venue" placeholder="Event venue" />
               <MyDateInput
-                name='date'
-                placeholderText='Date/Time (click here)'
-                timeFormat='HH:mm'
+                name="date"
+                placeholderText="Date/Time (click here)"
+                timeFormat="HH:mm"
                 showTimeSelect
-                timeCaption='time'
-                dateFormat='MMMM d, yyyy h:mm a'
+                timeCaption="time"
+                dateFormat="MMMM d, yyyy h:mm a"
               />
 
               <Button
                 loading={isSubmitting}
                 disabled={!isValid || !dirty || isSubmitting}
-                type='submit'
-                floated='right'
+                type="submit"
+                floated="right"
                 positive
-                content='Submit'
+                content="Submit"
               />
 
               {selectedEvent && (
                 <Button
                   loading={loadingCancel}
-                  type='button'
-                  floated='left'
+                  type="button"
+                  floated="left"
                   color={selectedEvent.isCancelled ? 'green' : 'red'}
                   content={
                     selectedEvent.isCancelled
@@ -147,10 +144,10 @@ const EventForm = ({ match, history }) => {
 
               <Button
                 as={Link}
-                to='/events'
-                type='submit'
-                floated='right'
-                content='Cancel'
+                to="/events"
+                type="submit"
+                floated="right"
+                content="Cancel"
                 disabled={isSubmitting}
               />
             </Form>
@@ -169,7 +166,7 @@ const EventForm = ({ match, history }) => {
         />
       </Segment>
     </>
-  );
-};
+  )
+}
 
-export default EventForm;
+export default EventForm

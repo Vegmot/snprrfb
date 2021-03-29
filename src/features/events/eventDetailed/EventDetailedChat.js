@@ -21,7 +21,7 @@ const EventDetailedChat = ({ eventId }) => {
   })
 
   const closeReplyFormHandler = () => {
-    setShowReplyForm({ open: false, commendId: null })
+    setShowReplyForm({ open: false, commentId: null })
   }
 
   useEffect(() => {
@@ -42,10 +42,10 @@ const EventDetailedChat = ({ eventId }) => {
   return (
     <>
       <Segment
-        textAlign='center'
-        attached='top'
+        textAlign="center"
+        attached="top"
         inverted
-        color='teal'
+        color="teal"
         style={{ border: 'none' }}
       >
         <Header>Chat about this event</Header>
