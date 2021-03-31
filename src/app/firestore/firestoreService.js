@@ -1,5 +1,7 @@
 import firebase from '../config/firebase'
 
+// I found a new feature in VS code! OUTLINE!
+
 const db = firebase.firestore()
 
 export const dataFromSnapshot = snapshot => {
