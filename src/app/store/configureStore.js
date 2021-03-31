@@ -1,18 +1,21 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer from './rootReducer';
-import thunk from 'redux-thunk';
-import { verifyAuth } from '../../features/auth/authActions';
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import rootReducer from './rootReducer'
+import thunk from 'redux-thunk'
+import { verifyAuth } from '../../features/auth/authActions'
+import { createBrowserHistory } from 'history'
+
+export const history = createBrowserHistory()
 
 const configureStore = () => {
   const store = createStore(
-    rootReducer,
+    rootReducer(history),
     composeWithDevTools(applyMiddleware(thunk))
-  );
+  )
 
-  store.dispatch(verifyAuth());
+  store.dispatch(verifyAuth())
 
-  return store;
-};
+  return store
+}
 
-export default configureStore;
+export default configureStore
